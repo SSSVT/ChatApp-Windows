@@ -12,7 +12,14 @@ namespace ESChatWindows.Data
             this.Friendships = new ConcurrentBag<Friendship>();
             this.Messages = new ConcurrentBag<Message>();
             this.Participant = new ConcurrentBag<Participant>();
-            this.Rooms = new ConcurrentBag<Room>();
+            //TODO: Remove tmp items
+            this.Rooms = new ConcurrentBag<Room>(new Room[]
+            {
+                new Room("Room 1", "Description 1"),
+                new Room("Room 2", "Description 2"),
+                new Room("Room 3", "Description 3"),
+                new Room("Room 4", "Description 4"),
+            });
             this.Users = new ConcurrentBag<User>();
         }
         public static ApplicationDataContext _Instance { get; set; }
