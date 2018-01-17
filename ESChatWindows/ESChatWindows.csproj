@@ -112,6 +112,9 @@
     <Compile Include="Windows\RoomManagerWindow.xaml.cs">
       <DependentUpon>RoomManagerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\UserSearchWindow.xaml.cs">
+      <DependentUpon>UserSearchWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Windows\ForgotPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\RoomManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UserSearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
