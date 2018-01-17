@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ESChatWindows.Models.Server;
+using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ESChatWindows.Controllers
@@ -9,14 +13,41 @@ namespace ESChatWindows.Controllers
         {
         }
 
-        public async Task ForgotPasswordAsync()
+        public async Task ForgotPasswordAsync(string username)
         {
+            try
+            {
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"ForgotPasswordAsync/{username}");
+
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    throw new HttpRequestException($"There was an exception: { response.StatusCode }");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             throw new NotImplementedException();
         }
 
-        public async Task ResetPasswordAsync()
+        public async Task ResetPasswordAsync(PasswordResetModel passwordReset)
         {
-            throw new NotImplementedException();
+            try
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(passwordReset), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.HttpClient.PostAsync($"ResetPasswordAsync/{passwordReset.ID}", content);
+
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    throw new HttpRequestException($"There was an exception: { response.StatusCode }");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
     }
 }
