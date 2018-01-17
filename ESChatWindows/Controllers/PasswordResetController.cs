@@ -28,7 +28,6 @@ namespace ESChatWindows.Controllers
             {
                 throw;
             }
-            throw new NotImplementedException();
         }
 
         public async Task ResetPasswordAsync(PasswordResetModel passwordReset)
