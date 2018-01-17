@@ -8,27 +8,44 @@
         xmlns:p="clr-namespace:ESChatWindows.Properties"
         xmlns:Server="clr-namespace:ESChatWindows.Models.Server" x:Class="ESChatWindows.Windows.MainWindow"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.WindowTitle}" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="Title" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DockPanel x:Name="DockPanelTop" HorizontalAlignment="Stretch" Width="Auto" Background="Gray" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <DockPanel x:Name="DockPanelLeft" HorizontalAlignment="Left" Margin="0,50,0,0" Width="200" Background="DarkGray">
-            <ListBox Height="519" VerticalAlignment="Top" Width="Auto">
-                <ListBox.DataContext>
-                    <Server:Room Name="asdf" Description="asdf"/>
-                </ListBox.DataContext>
-            </ListBox>
+        <DockPanel x:Name="DockPanelTop" HorizontalAlignment="Stretch" Width="Auto" Background="Gray" Height="50" VerticalAlignment="Top" >
+            <Grid>
+                <Label Content="AppTitle" Height="40" VerticalAlignment="Top" FontSize="22" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="10,6,0,0" HorizontalAlignment="Left" Width="83"/>
+                <Menu Width="150" Margin="605,8,10,8">
+                    <MenuItem x:Name="menuItem_User" Header="Test User" Width="150" Height="34">
+                        <MenuItem Header="Profile"/>
+                        <MenuItem Header="Logout"/>
+                    </MenuItem>
+                </Menu>
+            </Grid>
         </DockPanel>
+        <DockPanel x:Name="DockPanelLeft" HorizontalAlignment="Left" Margin="0,50,0,0" Width="210" Background="DarkGray">
+            <Grid>
+                <TabControl Width="210" HorizontalAlignment="Right" Margin="0,0,0,50">
+                    <TabItem Header="Rooms">
+                        <ListBox x:Name="lstbx_Rooms" >
+                            
+                        </ListBox>
+                    </TabItem>
+                    <TabItem Header="Friends">
+                        <ListBox x:Name="lstbx_Friends">
 
-        <TabControl Margin="200,50,0,43" Grid.ColumnSpan="2">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TextBlock Height="100" TextWrapping="Wrap" Text="TextBlock" Width="100"/>
-        </TabControl>
-        <Button Content="Button" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="89" Grid.Column="1"/>
-        <TextBox Height="23" Margin="205,0,104,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+                        </ListBox>
+                    </TabItem>
+                </TabControl>
+                <Button x:Name="btn_Add" Content="Add" HorizontalAlignment="Left" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="70,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="140,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
+            </Grid>
+        </DockPanel>
+        <Grid Margin="210,50,0,0">
+            <xctk:WatermarkTextBox Name="wtbx_MessageBox" Height="23" Margin="10,0,90,10" TextWrapping="Wrap" Watermark="Type in your message..." VerticalAlignment="Bottom"/>
+            <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+            <ListBox x:Name="lstbx_Messages" Margin="10,10,10,47"/>
+        </Grid>
+
+
     </Grid>
 </Window>
