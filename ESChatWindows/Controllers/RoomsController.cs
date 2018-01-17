@@ -36,29 +36,7 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task<List<Room>> FindAllAsync()
-        {
-            try
-            {
-                this.SetAuthorizationHeader();
-
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"FindAllAsync");
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Room>>(responseContent);
-                }
-
-                throw new HttpRequestException($"There was an exception: { response.StatusCode }");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<List<Room>> FindByUserIDAsync(long id)
+        public async Task<IEnumerable<Room>> FindByUserIDAsync(long id)
         {
             try
             {

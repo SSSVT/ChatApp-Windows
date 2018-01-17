@@ -20,7 +20,7 @@ namespace ESChatWindows.Controllers
             {
                 this.SetAuthorizationHeader();
 
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"GetCurrentUserAsync");
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"GetCurrentUserAsync").ConfigureAwait(false);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
