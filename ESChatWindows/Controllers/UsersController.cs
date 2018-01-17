@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace ESChatWindows.Controllers
 {
-    public class RoomsController : SecuredController
+    public class UsersController : SecuredController
     {
-        public RoomsController(string serverUrl, string controllerName) : base(serverUrl, controllerName)
-        {            
+        public UsersController(string serverUrl, string controllerName) : base(serverUrl, controllerName)
+        {
         }
 
-        public async Task<Room> FindAsync(long id)
+        public async Task<User> GetCurrentUserAsync()
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"FindAsync/{id}");
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"GetCurrentUserAsync");
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Room>(responseContent);
+                    return JsonConvert.DeserializeObject<User>(responseContent);
                 }
 
                 throw new HttpRequestException($"There was an exception: { response.StatusCode }");
@@ -36,18 +36,18 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task<List<Room>> FindAllAsync()
+        public async Task<List<User>> SearchForUsersByUsernameAsync(string id)
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"FindAllAsync");
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"SearchForUsersByUsernameAsync/{id}");
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Room>>(responseContent);
+                    return JsonConvert.DeserializeObject<List<User>>(responseContent);
                 }
 
                 throw new HttpRequestException($"There was an exception: { response.StatusCode }");
@@ -58,18 +58,18 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task<List<Room>> FindByUserIDAsync(long id)
+        public async Task<User> FindByUsernameAsync(string id)
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"FindByUserIDAsync/{id}");
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"FindByUsernameAsync/{id}");
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Room>>(responseContent);
+                    return JsonConvert.DeserializeObject<User>(responseContent);
                 }
 
                 throw new HttpRequestException($"There was an exception: { response.StatusCode }");
@@ -80,20 +80,18 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task<Room> CreateAsync(Room room)
+        public async Task<User> DetailAsync(long id)
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                StringContent content = new StringContent(JsonConvert.SerializeObject(room), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.HttpClient.GetAsync($"DetailAsync/{id}");
 
-                HttpResponseMessage response = await this.HttpClient.PostAsync($"CreateAsync", content);
-
-                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Room>(responseContent);
+                    return JsonConvert.DeserializeObject<User>(responseContent);
                 }
 
                 throw new HttpRequestException($"There was an exception: { response.StatusCode }");
@@ -104,41 +102,19 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task UpdateAsync(Room room)
+        public async Task UpdateAsync(User user)
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                StringContent content = new StringContent(JsonConvert.SerializeObject(room), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await this.HttpClient.PutAsync($"UpdateAsync/{room.ID}", content);
+                HttpResponseMessage response = await this.HttpClient.PutAsync($"UpdateAsync/{user.ID}", content);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
                     return;
-                }
-
-                throw new HttpRequestException($"There was an exception: { response.StatusCode }");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<Room> DeleteAsync(long id)
-        {
-            try
-            {
-                this.SetAuthorizationHeader();
-
-                HttpResponseMessage response = await this.HttpClient.DeleteAsync($"DeleteAsync/{id}");
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Room>(responseContent);
                 }
 
                 throw new HttpRequestException($"There was an exception: { response.StatusCode }");
