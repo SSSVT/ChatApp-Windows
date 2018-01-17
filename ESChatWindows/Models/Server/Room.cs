@@ -27,9 +27,6 @@ namespace ESChatWindows.Models.Server
         public string Description { get; set; }
         public DateTime? UTCCreationDate { get; set; }
 
-        [JsonIgnore]
-        public bool IsActive { get; set; }
-
         #region Virtual
         [JsonIgnore]
         public virtual User Owner { get; set; }
