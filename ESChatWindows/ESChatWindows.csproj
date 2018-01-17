@@ -77,13 +77,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\FriendshipsController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\PasswordResetController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\SecuredController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ApplicationDataContext.cs" />
     <Compile Include="Models\Server\Friendship.cs" />
     <Compile Include="Models\Server\Message.cs" />
     <Compile Include="Models\Server\Participant.cs" />
+    <Compile Include="Models\Server\PasswordResetModel.cs" />
     <Compile Include="Models\Server\RegistrationModel.cs" />
     <Compile Include="Models\Server\Room.cs" />
     <Compile Include="Models\Server\TokenModel.cs" />
@@ -102,6 +109,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Windows\RoomManagerWindow.xaml.cs">
+      <DependentUpon>RoomManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Windows\ForgotPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RoomManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
