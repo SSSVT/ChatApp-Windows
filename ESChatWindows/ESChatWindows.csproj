@@ -86,7 +86,9 @@
     <Compile Include="Controllers\SecuredController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Data\ApplicationBindingDataContext.cs" />
     <Compile Include="Data\ApplicationDataContext.cs" />
+    <Compile Include="Data\DataDownloader.cs" />
     <Compile Include="Models\Server\Friendship.cs" />
     <Compile Include="Models\Server\Message.cs" />
     <Compile Include="Models\Server\Participant.cs" />

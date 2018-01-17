@@ -29,8 +29,8 @@ namespace ESChatWindows.Windows
             LoginWindow loginWindow = new LoginWindow(Properties.Resources.ServerUrl);
             if (loginWindow.ShowDialog() == true)
             {
-                this.ApplicationDataContext = ApplicationDataContext.GetInstance();
-                this.ApplicationDataContext.Token = loginWindow.TokenModel;
+                this.ApplicationBindingDataContext = ApplicationBindingDataContext.GetInstance();
+                this.ApplicationBindingDataContext.Token = loginWindow.TokenModel;
                 this.DownloadData().Wait();
             }
             else
@@ -41,15 +41,10 @@ namespace ESChatWindows.Windows
 
         public async Task DownloadData()
         {
-            UsersController usersController = new UsersController(Properties.Resources.ServerUrl, "Users");
-            RoomsController roomsController = new RoomsController(Properties.Resources.ServerUrl, "Rooms");
-
-            this.ApplicationDataContext.User = await usersController.GetCurrentUserAsync().ConfigureAwait(false);
-
-            IEnumerable<Room> rooms = await roomsController.FindByUserIDAsync(this.ApplicationDataContext.User.ID);
-            this.ApplicationDataContext.Rooms = new System.Collections.Concurrent.ConcurrentBag<Room>(rooms);
+            DataDownloader downloader = new DataDownloader();
+            await downloader.GetCurrentUserAsync();
         }
 
-        public ApplicationDataContext ApplicationDataContext { get; set; }
+        public ApplicationBindingDataContext ApplicationBindingDataContext { get; set; }
     }
 }
