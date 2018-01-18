@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ESChatWindows.Windows"
+        xmlns:local="clr-namespace:ESChatWindows.Views"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:ESChatWindows.Properties"
         xmlns:Server="clr-namespace:ESChatWindows.Models.Server" 
+        xmlns:vm="clr-namespace:ESChatWindows.ViewModels"
         mc:Ignorable="d"
         Title="Title" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <DockPanel x:Name="DockPanelTop" HorizontalAlignment="Stretch" Width="Auto" Background="Gray" Height="50" VerticalAlignment="Top" >
             <Grid>
@@ -45,7 +49,5 @@
             <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
             <ListBox x:Name="lstbx_Messages" Margin="10,10,10,47"/>
         </Grid>
-
-
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 
-namespace ESChatWindows.Windows
+namespace ESChatWindows.Views
 {
     /// <summary>
     /// Interaction logic for UserSearchWindow.xaml

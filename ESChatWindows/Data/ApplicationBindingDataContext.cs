@@ -24,6 +24,17 @@ namespace ESChatWindows.Data
             return ApplicationBindingDataContext._Instance;
         }
 
-        public TokenModel Token => this.DataContext.Token;
+        public TokenModel Token
+        {
+            get
+            {
+                return this.DataContext.Token;
+            }
+            set
+            {
+                this.DataContext.Token = value;
+            }
+        }
+        
     }
 }

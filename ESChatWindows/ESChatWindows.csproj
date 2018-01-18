@@ -98,42 +98,43 @@
     <Compile Include="Models\Server\TokenModel.cs" />
     <Compile Include="Models\Server\User.cs" />
     <Compile Include="Models\Server\UserCredentials.cs" />
-    <Compile Include="Windows\ForgotPasswordWindow.xaml.cs">
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\ForgotPasswordWindow.xaml.cs">
       <DependentUpon>ForgotPasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LoginWindow.xaml.cs">
+    <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\RoomManagerWindow.xaml.cs">
+    <Compile Include="Views\RoomManagerWindow.xaml.cs">
       <DependentUpon>RoomManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\UserSearchWindow.xaml.cs">
+    <Compile Include="Views\UserSearchWindow.xaml.cs">
       <DependentUpon>UserSearchWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\ForgotPasswordWindow.xaml">
+    <Page Include="Views\ForgotPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LoginWindow.xaml">
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\RoomManagerWindow.xaml">
+    <Page Include="Views\RoomManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\UserSearchWindow.xaml">
+    <Page Include="Views\UserSearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

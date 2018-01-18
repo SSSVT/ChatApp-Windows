@@ -4,7 +4,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 
-namespace ESChatWindows.Windows
+namespace ESChatWindows.Views
 {
     public partial class LoginWindow : Window
     {

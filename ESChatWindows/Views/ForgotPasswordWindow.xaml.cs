@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ESChatWindows.Windows
+namespace ESChatWindows.Views
 {
     /// <summary>
     /// Interaction logic for ForgotPasswordWindow.xaml

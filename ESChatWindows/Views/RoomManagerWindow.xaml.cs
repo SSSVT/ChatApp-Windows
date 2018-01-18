@@ -1,7 +1,7 @@
 ﻿using ESChatWindows.Models.Server;
 using System.Windows;
 
-namespace ESChatWindows.Windows
+namespace ESChatWindows.Views
 {
     public partial class RoomManagerWindow : Window
     {
