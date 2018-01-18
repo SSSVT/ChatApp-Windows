@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Window x:Class="ESChatWindows.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ESChatWindows.Windows"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:ESChatWindows.Properties"
-        xmlns:Server="clr-namespace:ESChatWindows.Models.Server" x:Class="ESChatWindows.Windows.MainWindow"
+        xmlns:Server="clr-namespace:ESChatWindows.Models.Server" 
         mc:Ignorable="d"
         Title="Title" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
