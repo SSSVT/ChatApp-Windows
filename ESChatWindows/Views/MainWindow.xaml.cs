@@ -1,25 +1,11 @@
 ﻿using ESChatWindows.Controllers;
-using ESChatWindows.Data;
 using ESChatWindows.Models.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using ESChatWindows.ViewModels;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ESChatWindows.Views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -29,22 +15,23 @@ namespace ESChatWindows.Views
             LoginWindow loginWindow = new LoginWindow(Properties.Resources.ServerUrl);
             if (loginWindow.ShowDialog() == true)
             {
-                this.ApplicationBindingDataContext = ApplicationBindingDataContext.GetInstance();
-                this.ApplicationBindingDataContext.Token = loginWindow.TokenModel;
-                this.DownloadData().Wait();
+                Properties.Settings.Default.TokenValue = loginWindow.TokenModel.Token;
+                Properties.Settings.Default.TokenType = loginWindow.TokenModel.Type;
+                Properties.Settings.Default.TokenExp = loginWindow.TokenModel.Exp;
+
+                User user = new User();
+                Task task = Task.Run(async () => {
+                    UsersController usersController = new UsersController(Properties.Resources.ServerUrl, "Users");
+                    user = await usersController.GetCurrentUserAsync();
+                });
+                task.Wait();
+
+                (this.DataContext as MainViewModel).CurrentUser = user;
             }
             else
             {
                 this.Close();
             }
         }
-
-        public async Task DownloadData()
-        {
-            DataDownloader downloader = new DataDownloader();
-            await downloader.GetCurrentUserAsync();
-        }
-
-        public ApplicationBindingDataContext ApplicationBindingDataContext { get; set; }
     }
 }

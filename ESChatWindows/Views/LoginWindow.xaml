@@ -10,6 +10,6 @@
         <xctk:WatermarkTextBox Name="wtbx_username" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Username" VerticalAlignment="Top"/>
         <xctk:WatermarkPasswordBox Name="wtbx_password" Height="23" Margin="10,38,10,0" TextWrapping="Wrap" Watermark="Password" VerticalAlignment="Top"/>
         <Button Name="ButtonLogin" Click="ButtonLogin_Click" Content="_Login" HorizontalAlignment="Right" Margin="0,0,10,12" VerticalAlignment="Bottom" Width="75"/>
-        <Button Name="ButtonForgotPassword" Click="ButtonForgotPassword_Click" Content="_Forgot password" HorizontalAlignment="Left" Margin="10,0,0,12" VerticalAlignment="Bottom" Width="110"/>
+        <Button IsEnabled="False" Name="ButtonForgotPassword" Click="ButtonForgotPassword_Click" Content="_Forgot password" HorizontalAlignment="Left" Margin="10,0,0,12" VerticalAlignment="Bottom" Width="110"/>
     </Grid>
 </Window>

@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:ESChatWindows.Views"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:ESChatWindows.Properties"
-        xmlns:Server="clr-namespace:ESChatWindows.Models.Server" 
+        xmlns:Server="clr-namespace:ESChatWindows.Models.Server"
         xmlns:vm="clr-namespace:ESChatWindows.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="Title" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -29,25 +30,43 @@
             <Grid>
                 <TabControl Width="210" HorizontalAlignment="Right" Margin="0,0,0,50">
                     <TabItem Header="Rooms">
-                        <ListBox x:Name="lstbx_Rooms" >
-                            
+                        <ListBox x:Name="lstbx_Rooms" ItemsSource="{Binding Rooms}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding RoomsSwitch}" CommandParameter="{Binding ElementName=lstbx_Rooms, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                        <TextBlock Text="{Binding Path=Description}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </TabItem>
                     <TabItem Header="Friends">
-                        <ListBox x:Name="lstbx_Friends">
-
+                        <ListBox x:Name="lstbx_Friends" ItemsSource="{Binding Friendships}">
+                            
                         </ListBox>
                     </TabItem>
                 </TabControl>
-                <Button x:Name="btn_Add" Content="Add" HorizontalAlignment="Left" Width="70" Height="50" VerticalAlignment="Bottom"/>
-                <Button x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="70,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
-                <Button x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="140,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button IsEnabled="False" x:Name="btn_Add" Content="Add" HorizontalAlignment="Left" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button IsEnabled="False" x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="70,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button IsEnabled="False" x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="140,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
             </Grid>
         </DockPanel>
         <Grid Margin="210,50,0,0">
             <xctk:WatermarkTextBox Name="wtbx_MessageBox" Height="23" Margin="10,0,90,10" TextWrapping="Wrap" Watermark="Type in your message..." VerticalAlignment="Bottom"/>
             <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
-            <ListBox x:Name="lstbx_Messages" Margin="10,10,10,47"/>
+            <ListBox x:Name="lstbx_Messages" Margin="10,10,10,47" ItemsSource="{Binding SelectedRoom.Messages}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label x:Name="MessageContent" Content="{Binding Content}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

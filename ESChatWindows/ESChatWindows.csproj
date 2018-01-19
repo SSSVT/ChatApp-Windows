@@ -40,6 +40,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -86,9 +90,6 @@
     <Compile Include="Controllers\SecuredController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Data\ApplicationBindingDataContext.cs" />
-    <Compile Include="Data\ApplicationDataContext.cs" />
-    <Compile Include="Data\DataDownloader.cs" />
     <Compile Include="Models\Server\Friendship.cs" />
     <Compile Include="Models\Server\Message.cs" />
     <Compile Include="Models\Server\Participant.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Models\Server\TokenModel.cs" />
     <Compile Include="Models\Server\User.cs" />
     <Compile Include="Models\Server\UserCredentials.cs" />
+    <Compile Include="Objects\Command.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\ForgotPasswordWindow.xaml.cs">
       <DependentUpon>ForgotPasswordWindow.xaml</DependentUpon>
@@ -156,6 +158,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

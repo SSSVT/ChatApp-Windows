@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ESChatWindows.Models.Server
 {
@@ -8,17 +8,11 @@ namespace ESChatWindows.Models.Server
     {
         public Room()
         {
-
         }
-        public Room(string name, string description)
+        public Room(string name, string description) : this()
         {
             this.Name = name;
             this.Description = description;
-        }
-        public Room(string name, string description, User owner) : this(name, description)
-        {
-            this.IDOwner = owner.ID;
-            this.Owner = owner;
         }
 
         public long ID { get; set; }
@@ -28,12 +22,17 @@ namespace ESChatWindows.Models.Server
         public DateTime? UTCCreationDate { get; set; }
 
         #region Virtual
+        //[JsonIgnore]
+        //public virtual User Owner { get; set; }
+        //[JsonIgnore]
+        //public virtual ObservableCollection<Participant> Participants { get; set; }
         [JsonIgnore]
-        public virtual User Owner { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Participant> Participants { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Message> Messages { get; set; }
+        public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
         #endregion
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

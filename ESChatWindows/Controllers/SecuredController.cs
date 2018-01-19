@@ -1,6 +1,4 @@
-﻿using ESChatWindows.Data;
-using ESChatWindows.Models.Server;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 
 namespace ESChatWindows.Controllers
 {
@@ -12,9 +10,7 @@ namespace ESChatWindows.Controllers
 
         protected void SetAuthorizationHeader()
         {
-            TokenModel token = ApplicationDataContext.GetInstance().Token;
-
-            this.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.Type, token.Token);
+            this.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Properties.Settings.Default.TokenType, Properties.Settings.Default.TokenValue);
         }
     }
 }
