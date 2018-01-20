@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,19 +16,18 @@ namespace ESChatWindows.ViewModels
     {
         public MainViewModel()
         {
-            Task cut = Task.Run(async () => {
+            Task.Run(async () => {
                 UsersController usersController = new UsersController(Properties.Resources.ServerUrl, "Users");
                 this.CurrentUser = await usersController.GetCurrentUserAsync();
-            });
-            cut.Wait();
+            }).Wait();
+            this.StartPeriodicWorker();
             this.RoomsChangedCommand = new Command<Room>(this.RoomChanged);
             this.RoomAddedCommand = new Command<object>(this.RoomAdded);
             this.MessageSendCommand = new Command<string>(this.MessageSend);
 
-            Task dwt = Task.Run(async () => {
-                await this.InitialDownload();
-            });
-            dwt.Wait();
+            Task.Run(async () => {
+                await this.DownloadDataFromServer();
+            }).Wait();
         }
 
         #region Events
@@ -52,6 +52,9 @@ namespace ESChatWindows.ViewModels
         #region Properties
         public Room SelectedRoom { get; set; }
         public User CurrentUser { get; set; }
+
+        protected readonly BackgroundWorker _backgroundWorker = new BackgroundWorker();
+        protected readonly Timer _timer = new Timer(2000);
         #endregion
     }
 
@@ -102,7 +105,7 @@ namespace ESChatWindows.ViewModels
         #endregion
 
         #region Methods
-        public async Task InitialDownload()
+        public async Task DownloadDataFromServer()
         {
             this.Rooms = new ObservableCollection<Room>(await this.RoomsController.FindByUserIDAsync(this.CurrentUser.ID));
 
@@ -112,6 +115,34 @@ namespace ESChatWindows.ViewModels
             }
 
             this.Friendships = new ObservableCollection<Friendship>(await this.FriendshipsController.GetByUserIDAsync(this.CurrentUser.ID));
+        }
+        public void StartPeriodicWorker()
+        {
+            this._timer.Elapsed += _timer_Elapsed;
+            this._timer.Interval = 20000;
+            //this._timer.Start();
+
+            this._backgroundWorker.DoWork += _backgroundWorker_DoWork;
+            this._backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
+            //this._backgroundWorker.RunWorkerAsync();
+        }
+
+        protected void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            this._backgroundWorker.RunWorkerAsync();
+        }
+
+        protected void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //this._backgroundWorker.RunWorkerAsync();
+        }
+
+        protected void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Task.Run(async () =>
+            {
+                await this.DownloadDataFromServer();
+            }).Wait();
         }
         #endregion
     }

@@ -5,18 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ESChatWindows.Views"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:vm="clr-namespace:ESChatWindows.ViewModels"
         mc:Ignorable="d"
         Title="Search for user" Height="300" Width="300">
+    <Window.DataContext>
+        <vm:SearchForUserViewModel/>
+    </Window.DataContext>
     <Grid>
         <xctk:WatermarkTextBox Name="WTBUsername" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Enter username" VerticalAlignment="Top" KeyDown="WTBUsername_KeyDown"/>
-        <ListView Margin="10,38,10,35">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ListBox Margin="10,38,10,35">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock></TextBlock>
+                        <Button></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button Content="OK" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75"/>
-
     </Grid>
 </Window>
