@@ -19,9 +19,9 @@
             <Grid>
                 <Label Content="AppTitle" Height="40" VerticalAlignment="Top" FontSize="22" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="10,6,0,0" HorizontalAlignment="Left" Width="83"/>
                 <Menu Width="150" Margin="605,8,10,8">
-                    <MenuItem x:Name="menuItem_User" Header="Test User" Width="150" Height="34">
-                        <MenuItem Header="Profile"/>
-                        <MenuItem Header="Logout"/>
+                    <MenuItem x:Name="menuItem_User" Header="{Binding CurrentUser}" Width="150" Height="34">
+                        <MenuItem IsEnabled="False" Header="Profile"/>
+                        <MenuItem IsEnabled="False" Header="Logout"/>
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -33,7 +33,7 @@
                         <ListBox x:Name="lstbx_Rooms" ItemsSource="{Binding Rooms}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding RoomsSwitch}" CommandParameter="{Binding ElementName=lstbx_Rooms, Path=SelectedItem}"/>
+                                    <i:InvokeCommandAction Command="{Binding RoomsChangedCommand}" CommandParameter="{Binding ElementName=lstbx_Rooms, Path=SelectedItem}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListBox.ItemTemplate>
@@ -59,7 +59,7 @@
         </DockPanel>
         <Grid Margin="210,50,0,0">
             <xctk:WatermarkTextBox Name="wtbx_MessageBox" Height="23" Margin="10,0,90,10" TextWrapping="Wrap" Watermark="Type in your message..." VerticalAlignment="Bottom"/>
-            <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+            <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23" Command="{Binding MessageSendCommand}" CommandParameter="{Binding ElementName=wtbx_MessageBox, Path=Text}"/>
             <ListBox x:Name="lstbx_Messages" Margin="10,10,10,47" ItemsSource="{Binding SelectedRoom.Messages}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

@@ -40,5 +40,10 @@ namespace ESChatWindows.Models.Server
         [JsonIgnore]
         public virtual ICollection<Friendship> ReceivedFriendships { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return $"{this.FirstName} {this.LastName}";
+        }
     }
 }

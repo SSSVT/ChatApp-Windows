@@ -8,13 +8,12 @@ namespace ESChatWindows.Views
 {
     public partial class LoginWindow : Window
     {
-        public LoginWindow(string serverUrl)
+        public LoginWindow()
         {
             InitializeComponent();
-            this.TokenController = new TokenController(serverUrl, "Token");
+            this.TokenController = new TokenController(Properties.Resources.ServerUrl, "Token");
         }
 
-        public TokenModel TokenModel { get; protected set; }
         protected TokenController TokenController { get; set; }
 
         private void ButtonForgotPassword_Click(object sender, RoutedEventArgs e)
@@ -33,10 +32,23 @@ namespace ESChatWindows.Views
 
             if (Regex.IsMatch(username, "[a-zA-Z0-9]{4,64}") && Regex.IsMatch(password, ".{8,128}"))
             {
-                UserCredentials credentials = new UserCredentials(username, password);
-                this.TokenModel = await this.TokenController.LoginAsync(credentials);
+                try
+                {
+                    UserCredentials credentials = new UserCredentials(username, password);
+                    TokenModel token = await this.TokenController.LoginAsync(credentials);
 
-                this.DialogResult = true;
+                    Properties.Settings.Default.TokenValue = token.Token;
+                    Properties.Settings.Default.TokenType = token.Type;
+                    Properties.Settings.Default.TokenExp = token.Exp;
+
+                    MainWindow window = new MainWindow();
+                    window.Show();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Properties.Resources.WindowTitle);
+                }
             }
             else
             {
