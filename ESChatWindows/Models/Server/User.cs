@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ESChatWindows.Models.Server
 {
@@ -30,15 +31,15 @@ namespace ESChatWindows.Models.Server
 
         #region Virtual
         [JsonIgnore]
-        public virtual ICollection<Room> OwnedRooms { get; set; }
+        public virtual ObservableCollection<Room> OwnedRooms { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual ObservableCollection<Participant> Participants { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ObservableCollection<Message> Messages { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Friendship> SentFriendships { get; set; }
+        public virtual ObservableCollection<Friendship> SentFriendships { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Friendship> ReceivedFriendships { get; set; }
+        public virtual ObservableCollection<Friendship> ReceivedFriendships { get; set; }
         #endregion
 
         public override string ToString()

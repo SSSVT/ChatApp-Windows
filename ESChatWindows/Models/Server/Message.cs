@@ -20,6 +20,9 @@ namespace ESChatWindows.Models.Server
         #region Virtual
         [JsonIgnore]
         public virtual User Owner { get; set; }
+
+        [JsonIgnore]
+        public virtual Room Room { get; set; }
         #endregion
     }
 }

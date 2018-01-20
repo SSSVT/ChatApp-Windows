@@ -105,7 +105,12 @@ namespace ESChatWindows.ViewModels
         public async Task InitialDownload()
         {
             this.Rooms = new ObservableCollection<Room>(await this.RoomsController.FindByUserIDAsync(this.CurrentUser.ID));
-            //TODO: Download rooms messages
+
+            foreach (Room room in this.Rooms)
+            {
+                room.Messages = new ObservableCollection<Message>(await this.MessagesController.GetByRoomIDAsync(room.ID));
+            }
+
             this.Friendships = new ObservableCollection<Friendship>(await this.FriendshipsController.GetByUserIDAsync(this.CurrentUser.ID));
         }
         #endregion

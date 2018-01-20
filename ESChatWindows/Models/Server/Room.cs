@@ -22,10 +22,10 @@ namespace ESChatWindows.Models.Server
         public DateTime? UTCCreationDate { get; set; }
 
         #region Virtual
-        //[JsonIgnore]
-        //public virtual User Owner { get; set; }
-        //[JsonIgnore]
-        //public virtual ObservableCollection<Participant> Participants { get; set; }
+        [JsonIgnore]
+        public virtual User Owner { get; set; }
+        [JsonIgnore]
+        public virtual ObservableCollection<Participant> Participants { get; set; }
         [JsonIgnore]
         public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
         #endregion
