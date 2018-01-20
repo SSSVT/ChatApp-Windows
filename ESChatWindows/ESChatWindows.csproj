@@ -100,6 +100,7 @@
     <Compile Include="Models\Server\User.cs" />
     <Compile Include="Models\Server\UserCredentials.cs" />
     <Compile Include="Objects\Command.cs" />
+    <Compile Include="Objects\TokenManager.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\ForgotPasswordWindow.xaml.cs">
       <DependentUpon>ForgotPasswordWindow.xaml</DependentUpon>

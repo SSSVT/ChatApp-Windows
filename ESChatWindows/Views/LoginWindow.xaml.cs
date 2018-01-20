@@ -1,5 +1,6 @@
 ﻿using ESChatWindows.Controllers;
 using ESChatWindows.Models.Server;
+using ESChatWindows.Objects;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -37,9 +38,7 @@ namespace ESChatWindows.Views
                     UserCredentials credentials = new UserCredentials(username, password);
                     TokenModel token = await this.TokenController.LoginAsync(credentials);
 
-                    Properties.Settings.Default.TokenValue = token.Token;
-                    Properties.Settings.Default.TokenType = token.Type;
-                    Properties.Settings.Default.TokenExp = token.Exp;
+                    TokenManager.SetToken(token);
 
                     MainWindow window = new MainWindow();
                     window.Show();
