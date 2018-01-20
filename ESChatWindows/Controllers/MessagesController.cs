@@ -36,13 +36,15 @@ namespace ESChatWindows.Controllers
             }
         }
 
-        public async Task<List<Message>> GetByRoomIDAsync(long id)
+        public async Task<List<Message>> GetByRoomIDAsync(long id, DateTime dateTime)
         {
             try
             {
                 this.SetAuthorizationHeader();
 
-                HttpResponseMessage response = await this.HttpClient.GetAsync($"GetByRoomIDAsync/{id}");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(dateTime), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.HttpClient.PostAsync($"GetByRoomIDAsync/{id}", content);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {

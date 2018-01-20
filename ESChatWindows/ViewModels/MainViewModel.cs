@@ -111,7 +111,7 @@ namespace ESChatWindows.ViewModels
 
             foreach (Room room in this.Rooms)
             {
-                room.Messages = new ObservableCollection<Message>(await this.MessagesController.GetByRoomIDAsync(room.ID));
+                room.Messages = new ObservableCollection<Message>(await this.MessagesController.GetByRoomIDAsync(room.ID,(DateTime)room.UTCCreationDate));
             }
 
             this.Friendships = new ObservableCollection<Friendship>(await this.FriendshipsController.GetByUserIDAsync(this.CurrentUser.ID));
