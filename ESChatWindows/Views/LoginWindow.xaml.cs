@@ -39,6 +39,8 @@ namespace ESChatWindows.Views
                     TokenModel token = await this.TokenController.LoginAsync(credentials);
 
                     TokenManager.SetToken(token);
+                    Properties.Settings.Default.Username = credentials.Username;
+                    Properties.Settings.Default.Password = credentials.Password;
 
                     MainWindow window = new MainWindow();
                     window.Show();
