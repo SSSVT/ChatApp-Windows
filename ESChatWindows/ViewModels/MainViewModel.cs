@@ -116,11 +116,17 @@ namespace ESChatWindows.ViewModels
         public async Task Refresh()
         {
             ObservableCollection<Room> downloadedRooms = await this.DownloadRooms();
+            this.UpdateRooms(downloadedRooms);            
 
+            ObservableCollection<Friendship> tmpFriendships = await this.DownloadFriendships();
+            this.UpdateFriendships(tmpFriendships);
+        }
+        public void UpdateRooms(ObservableCollection<Room> rooms)
+        {
             //Remove
             for (int i = 0; i < this.Rooms.Count; i++)
             {
-                Room tmpRoom = downloadedRooms.Where(x => x.ID == this.Rooms[i].ID).FirstOrDefault();
+                Room tmpRoom = rooms.Where(x => x.ID == this.Rooms[i].ID).FirstOrDefault();
 
                 //Remove
                 if (tmpRoom == null)
@@ -132,7 +138,7 @@ namespace ESChatWindows.ViewModels
                 }
             }
             //Add or update
-            foreach (Room item in downloadedRooms)
+            foreach (Room item in rooms)
             {
                 Room room = this.Rooms.Where(x => x.ID == item.ID).FirstOrDefault();
                 if (room == null)
@@ -150,9 +156,43 @@ namespace ESChatWindows.ViewModels
                     });
                 }
             }
-
+        }
+        public void UpdateFriendships(ObservableCollection<Friendship> friendships)
+        {
             //TODO: Refresh Friendships
-            ObservableCollection<Friendship> tmpFriendships = await this.DownloadFriendships();            
+            //Remove
+            for (int i = 0; i < this.Friendships.Count; i++)
+            {
+                Friendship item = friendships.Where(x => x.ID == this.Friendships[i].ID).FirstOrDefault();
+
+                //Remove
+                if (item == null)
+                {
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        this.Friendships.RemoveAt(i);
+                    });
+                }
+            }
+            //Add or update
+            foreach (Friendship item in friendships)
+            {
+                Friendship friendship = this.Friendships.Where(x => x.ID == item.ID).FirstOrDefault();
+                if (friendship == null)
+                {
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        this.Friendships.Add(item);
+                    });
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        friendship.Update(item);
+                    });
+                }
+            }
         }
 
         public async Task<ObservableCollection<Room>> DownloadRooms()

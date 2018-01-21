@@ -16,6 +16,11 @@ namespace ESChatWindows.Models.Server
         public virtual User Sender { get; set; }
         [JsonIgnore]
         public virtual User Recipient { get; set; }
+
+        public void Update(Friendship item)
+        {
+            this.UTCAccepted = item.UTCAccepted;
+        }
         #endregion
     }
 }
