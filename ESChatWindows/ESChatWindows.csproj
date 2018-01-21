@@ -99,6 +99,7 @@
     <Compile Include="Models\Server\TokenModel.cs" />
     <Compile Include="Models\Server\User.cs" />
     <Compile Include="Models\Server\UserCredentials.cs" />
+    <Compile Include="Objects\ListBoxBehavior.cs" />
     <Compile Include="Objects\Command.cs" />
     <Compile Include="Objects\TokenManager.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

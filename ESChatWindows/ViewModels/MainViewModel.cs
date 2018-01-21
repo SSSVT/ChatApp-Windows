@@ -4,6 +4,7 @@ using ESChatWindows.Objects;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 
 namespace ESChatWindows.ViewModels
 {
+    public delegate void OnMessageSend();
+
     public partial class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel()
@@ -32,6 +35,7 @@ namespace ESChatWindows.ViewModels
 
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
+        public event OnMessageSend OnMessageSend;
         #endregion
         #region ICommand
         public ICommand RoomsChangedCommand { get; protected set; }
@@ -84,12 +88,12 @@ namespace ESChatWindows.ViewModels
                         UTCSend = DateTime.UtcNow,
                         Content = item
                     };
-                    Task.Run(async () => {
+                    Task.Run(async () =>
+                    {
                         await this.MessagesController.CreateAsync(message);
+                        await this.Refresh();
                     });
-                    //TODO: Download messages
-                    this.SelectedRoom.Messages.Add(message);
-                    throw new NotImplementedException();
+                    this.OnMessageSend();
                 }
                 catch (Exception ex)
                 {
@@ -111,12 +115,15 @@ namespace ESChatWindows.ViewModels
         }
         public async Task Refresh()
         {
-            ObservableCollection<Room> tmpRoom = await this.DownloadRooms();
-            //TODO: Fix (reseting UI)
+            ObservableCollection<Room> downloadedRooms = await this.DownloadRooms();
+
+            //Remove
             for (int i = 0; i < this.Rooms.Count; i++)
             {
+                Room tmpRoom = downloadedRooms.Where(x => x.ID == this.Rooms[i].ID).FirstOrDefault();
 
-                if (!tmpRoom.Contains(this.Rooms[i]))
+                //Remove
+                if (tmpRoom == null)
                 {
                     Application.Current.Dispatcher.Invoke(delegate
                     {
@@ -124,17 +131,27 @@ namespace ESChatWindows.ViewModels
                     });
                 }
             }
-            foreach (Room item in tmpRoom)
+            //Add or update
+            foreach (Room item in downloadedRooms)
             {
-                if (!this.Rooms.Contains(item))
+                Room room = this.Rooms.Where(x => x.ID == item.ID).FirstOrDefault();
+                if (room == null)
                 {
                     Application.Current.Dispatcher.Invoke(delegate
                     {
                         this.Rooms.Add(item);
                     });
                 }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        room.Update(item);
+                    });
+                }
             }
 
+            //TODO: Refresh Friendships
             ObservableCollection<Friendship> tmpFriendships = await this.DownloadFriendships();            
         }
 
@@ -162,7 +179,6 @@ namespace ESChatWindows.ViewModels
             this._backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             this._backgroundWorker.RunWorkerAsync();
         }
-
         protected void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!this._backgroundWorker.IsBusy)
@@ -170,13 +186,11 @@ namespace ESChatWindows.ViewModels
                 this._backgroundWorker.RunWorkerAsync();
             }                
         }
-
         protected void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.PropertyChanged(this, new PropertyChangedEventArgs("Rooms"));
             this.PropertyChanged(this, new PropertyChangedEventArgs("Friendships"));
         }
-
         protected void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             Task.Run(async () =>
