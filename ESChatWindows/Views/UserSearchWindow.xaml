@@ -7,13 +7,13 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:vm="clr-namespace:ESChatWindows.ViewModels"
         mc:Ignorable="d"
-        Title="Search for user" Height="300" Width="300">
+        Title="Search for user" Height="300" Width="300" Background="#FFA00000">
     <Window.DataContext>
         <vm:SearchForUserViewModel/>
     </Window.DataContext>
     <Grid>
-        <xctk:WatermarkTextBox Name="WTBUsername" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Enter username" VerticalAlignment="Top" KeyDown="WTBUsername_KeyDown"/>
-        <ListBox Margin="10,38,10,35">
+        <xctk:WatermarkTextBox Name="WTBUsername" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Enter username" VerticalAlignment="Top" KeyDown="WTBUsername_KeyDown" FontFamily="Tw Cen MT"/>
+        <ListBox x:Name="listBox_users" Margin="10,38,10,35">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -23,6 +23,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="OK" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75"/>
+        <Button x:Name="btn_addFriend" Content="Add" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" BorderBrush="{x:Null}" Background="White"/>
+        <Button x:Name="btn_storno" Content="Storno" HorizontalAlignment="Right" Margin="0,0,207,8" VerticalAlignment="Bottom" Width="75" BorderBrush="{x:Null}" Background="White"/>
     </Grid>
 </Window>

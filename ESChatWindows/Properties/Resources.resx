@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ServerUrl" xml:space="preserve">
-    <value>http://localhost:53513/api/v1/</value>
+    <value>http://localhost:2393/api/v1/</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>ESChat Windows</value>

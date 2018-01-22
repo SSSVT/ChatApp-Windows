@@ -8,6 +8,7 @@ namespace ESChatWindows.Views
         public RoomManagerWindow()
         {
             InitializeComponent();
+            this.Room = new Room();
         }
         public RoomManagerWindow(Room room) : this()
         {

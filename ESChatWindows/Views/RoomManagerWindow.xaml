@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Room Manager" Height="136" Width="300">
+        Title="Room Manager" Height="136" Width="300" Background="#FFA00000">
     <Grid>
         <xctk:WatermarkTextBox Name="WTBName" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Name" VerticalAlignment="Top"/>
-        <xctk:WatermarkTextBox Name="WTBDescription" Height="23" Margin="10,38,10,0" TextWrapping="Wrap" Watermark="Description" VerticalAlignment="Top"/>
-        <Button Name="ButtonCancel" Click="ButtonCancel_Click" Content="Cancel" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom"/>
-        <Button Name="ButtonSave" Click="ButtonSave_Click" Content="Save" HorizontalAlignment="Right" Margin="0,0,10,10" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <xctk:WatermarkTextBox Name="WTBDescription" Height="23" Margin="10,38,10,0" TextWrapping="Wrap" Watermark="Description" VerticalAlignment="Top" FontFamily="Tw Cen MT"/>
+        <Button Name="ButtonCancel" Click="ButtonCancel_Click" Content="Cancel" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="20" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Background="White"/>
+        <Button Name="ButtonSave" Click="ButtonSave_Click" Content="Save" HorizontalAlignment="Right" Margin="0,0,10,10" Width="75" Height="20" VerticalAlignment="Bottom" Background="White" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>

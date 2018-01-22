@@ -56,5 +56,12 @@ namespace ESChatWindows.Views
                 MessageBox.Show(this, "Invalid login", Properties.Resources.WindowTitle);
             }
         }
+
+        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            RegisterWindow window = new RegisterWindow();
+            window.Show();
+            this.Close();
+        }
     }
 }

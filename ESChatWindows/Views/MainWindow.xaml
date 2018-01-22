@@ -8,14 +8,14 @@
         xmlns:obj="clr-namespace:ESChatWindows.Objects"
         xmlns:vm="clr-namespace:ESChatWindows.ViewModels"
         mc:Ignorable="d"
-        Title="Title" Height="600" Width="800" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="Title" Height="600" Width="834" MinHeight="600" MinWidth="800" WindowStartupLocation="CenterScreen" Background="#FFA00000">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <DockPanel x:Name="DockPanelTop" HorizontalAlignment="Stretch" Width="Auto" Background="Gray" Height="50" VerticalAlignment="Top" >
+        <DockPanel x:Name="DockPanelTop" HorizontalAlignment="Stretch" Width="Auto" Background="#FFA00000" Height="50" VerticalAlignment="Top" >
             <Grid>
-                <Label Content="AppTitle" Height="40" VerticalAlignment="Top" FontSize="22" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="10,6,0,0" HorizontalAlignment="Left" Width="83"/>
+                <Label Content="ChatApp" Height="40" VerticalAlignment="Top" FontSize="22" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="10,6,0,0" HorizontalAlignment="Left" Width="83"/>
                 <Menu Width="150" Margin="0,8,11,8" HorizontalAlignment="Right">
                     <MenuItem x:Name="menuItem_User" Header="{Binding CurrentUser}" Width="150" Height="34">
                         <MenuItem IsEnabled="False" Header="Profile"/>
@@ -24,11 +24,11 @@
                 </Menu>
             </Grid>
         </DockPanel>
-        <DockPanel x:Name="DockPanelLeft" HorizontalAlignment="Left" Margin="0,50,0,0" Width="210" Background="DarkGray">
+        <DockPanel x:Name="DockPanelLeft" HorizontalAlignment="Left" Margin="10,50,0,0" Width="200" Background="DarkGray">
             <Grid>
-                <TabControl Width="210" HorizontalAlignment="Right" Margin="0,0,0,50">
-                    <TabItem Header="Rooms">
-                        <ListBox x:Name="lstbx_Rooms" ItemsSource="{Binding Rooms}" >
+                <TabControl Width="200" HorizontalAlignment="Right" Margin="0,0,0,50" Background="#FFA00000" BorderBrush="#FFA00000">
+                    <TabItem Header="Rooms" FontFamily="Tw Cen MT" FontSize="14" Margin="-3,-2,-2,-3">
+                        <ListBox x:Name="lstbx_Rooms" ItemsSource="{Binding Rooms}" HorizontalAlignment="Right" Width="210" Margin="-10,-4,-6,-2" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding RoomsChangedCommand}" CommandParameter="{Binding ElementName=lstbx_Rooms, Path=SelectedItem}"/>
@@ -44,21 +44,21 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </TabItem>
-                    <TabItem Header="Friends">
-                        <ListBox x:Name="lstbx_Friends" ItemsSource="{Binding Friendships}">
-                            
+                    <TabItem Header="Friends" FontFamily="Tw Cen MT" FontSize="14" Margin="-2,-2,-2,-3">
+                        <ListBox x:Name="lstbx_Friends" ItemsSource="{Binding Friendships}" Margin="-4,-3,-3,0">
+
                         </ListBox>
                     </TabItem>
                 </TabControl>
-                <Button IsEnabled="False" x:Name="btn_Add" Content="Add" HorizontalAlignment="Left" Width="70" Height="50" VerticalAlignment="Bottom"/>
-                <Button IsEnabled="False" x:Name="btn_Edit" Content="Edit" HorizontalAlignment="Left" Margin="70,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
-                <Button IsEnabled="False" x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="140,0,0,0" Width="70" Height="50" VerticalAlignment="Bottom"/>
+                <Button IsEnabled="False" x:Name="btn_Add" Content="Add" HorizontalAlignment="Left" Width="67" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,5" FontFamily="Tw Cen MT"/>
+                <Button IsEnabled="False" x:Name="btn_Edit" Content="Edit" Margin="67,0,68,5" Height="40" VerticalAlignment="Bottom" FontFamily="Tw Cen MT"/>
+                <Button IsEnabled="False" x:Name="btn_Remove" Content="Remove" HorizontalAlignment="Left" Margin="132,0,0,5" Width="67" Height="40" VerticalAlignment="Bottom" FontFamily="Tw Cen MT"/>
             </Grid>
         </DockPanel>
-        <Grid Margin="210,50,0,0">
-            <xctk:WatermarkTextBox Name="wtbx_MessageBox" Height="23" Margin="10,0,90,10" TextWrapping="Wrap" Watermark="Type in your message..." VerticalAlignment="Bottom"/>
-            <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23" Command="{Binding MessageSendCommand}" CommandParameter="{Binding ElementName=wtbx_MessageBox, Path=Text}"/>
-            <ListBox x:Name="ListBoxMessages" Margin="10,10,10,47" ItemsSource="{Binding SelectedRoom.Messages}"
+        <Grid Margin="0,50,0,0" Background="#FFA00000" HorizontalAlignment="Right" Width="616">
+            <xctk:WatermarkTextBox Name="wtbx_MessageBox" Height="27" Margin="10,0,90,10" TextWrapping="Wrap" Watermark="Type in your message..." VerticalAlignment="Bottom" BorderBrush="White" Background="White"/>
+            <Button x:Name="btn_Send" Content="Send" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="27" Command="{Binding MessageSendCommand}" CommandParameter="{Binding ElementName=wtbx_MessageBox, Path=Text}" BorderBrush="{x:Null}" Background="White"/>
+            <ListBox x:Name="ListBoxMessages" Margin="10,0,10,47" ItemsSource="{Binding SelectedRoom.Messages}"
                      obj:ListBoxBehavior.ScrollOnNewItem="True">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

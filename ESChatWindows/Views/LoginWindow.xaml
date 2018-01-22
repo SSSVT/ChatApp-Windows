@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Login" Height="140" Width="300" WindowState="Normal" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Login" Height="253.02" Width="295.333" WindowState="Normal" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFA00000">
     <Grid Margin="0,1,0,-1">
-        <xctk:WatermarkTextBox Name="wtbx_username" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Watermark="Username" VerticalAlignment="Top"/>
-        <xctk:WatermarkPasswordBox Name="wtbx_password" Height="23" Margin="10,38,10,0" TextWrapping="Wrap" Watermark="Password" VerticalAlignment="Top"/>
-        <Button Name="ButtonLogin" Click="ButtonLogin_Click" Content="_Login" HorizontalAlignment="Right" Margin="0,0,10,12" VerticalAlignment="Bottom" Width="75"/>
-        <Button IsEnabled="False" Name="ButtonForgotPassword" Click="ButtonForgotPassword_Click" Content="_Forgot password" HorizontalAlignment="Left" Margin="10,0,0,12" VerticalAlignment="Bottom" Width="110"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <xctk:WatermarkTextBox Name="wtbx_username" Height="23" Margin="80,40,0,0" TextWrapping="Wrap" Watermark="Username" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="133" FontFamily="Tw Cen MT"/>
+        <xctk:WatermarkPasswordBox Name="wtbx_password" Height="23" Margin="80,77,0,0" TextWrapping="Wrap" Watermark="Password" VerticalAlignment="Top" HorizontalAlignment="Left" Width="133" Grid.ColumnSpan="2" FontFamily="Tw Cen MT"/>
+        <Button Name="ButtonLogin" Click="ButtonLogin_Click" Content="Login" HorizontalAlignment="Right" Margin="0,0,10,12" VerticalAlignment="Bottom" Width="75" Grid.Column="1" Height="20"/>
+        <Button IsEnabled="False" Name="ButtonForgotPassword" Click="ButtonForgotPassword_Click" Content="_Forgot password" HorizontalAlignment="Left" Margin="10,0,0,12" VerticalAlignment="Bottom" Width="110" Height="20" FontFamily="Tw Cen MT"/>
+        <Label Content="You don't have account?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,115,0,0" Grid.ColumnSpan="2" Height="26" Width="126" FontFamily="Tw Cen MT"/>
+        <Label Content="CLICK HERE" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,146,0,0" FontWeight="Bold" Foreground="White" MouseDown="Label_MouseDown" Height="26" Width="76" Grid.ColumnSpan="2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"/>
+        <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="120,3,0,0" FontSize="20" FontWeight="Bold" FontFamily="Tw Cen MT Condensed Extra Bold"/>
     </Grid>
 </Window>
